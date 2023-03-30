@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             ProductTypesSeeder::class,
-            Product::class
+            ProductsSeeder::class
         ]);
     }
 }

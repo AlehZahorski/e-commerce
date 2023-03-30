@@ -9,7 +9,7 @@ class ProductType extends Model
 {
     use HasFactory;
 
-    protected $table = 'companies';
+    protected $table = 'product_types';
 
     protected $fillable = [
         'type'
