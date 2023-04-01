@@ -126,15 +126,6 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Iphone 14 Pro Max\",\r\n    \"image\": \"path/iphone.png\",\r\n    \"product_type_id\": 1,\r\n    \"desc_short\": \"Iphone 14 pro max w nowejłonie\",\r\n    \"desc_full\": \"Najnowszy iphone spoko i wgl tylko ciut za drogi xD\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "http://127.0.0.1:8000/api/product/delete/4",
 					"protocol": "http",
