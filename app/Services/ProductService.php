@@ -39,6 +39,8 @@ class ProductService
 
     public function createProduct(CreateProductRequest $request): bool
     {
+        // todo auth check but maybe be better check it on controller
+
         $newProduct = Product::create([
             'name' => $request->name,
             'image' => $request->image,
@@ -56,6 +58,8 @@ class ProductService
 
     public function updateProduct(UpdateProductRequest $request, int $id): bool
     {
+        // todo auth check but maybe be better check it on controller
+
         $product = Product::query()->find($id);
 
         if (
@@ -78,6 +82,22 @@ class ProductService
             'desc_short' => $request->desc_short,
             'desc_full' => $request->desc_full
         ]);
+
+        return true;
+    }
+
+    public function deleteProduct(int $id): bool
+    {
+        // todo auth check but maybe be better check it on controller
+
+        $product = Product::query()
+            ->where('id', '=', $id)->first();
+
+        if (!$product) {
+            return false;
+        }
+
+        $product->delete();
 
         return true;
     }
