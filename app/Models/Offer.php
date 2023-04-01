@@ -14,6 +14,8 @@ class Offer extends Model
     protected $fillable = [
         'product_id',
         'price',
-        'currency_id'
+        'currency_id',
+        'desc_short',
+        'desc_full'
     ];
 }
