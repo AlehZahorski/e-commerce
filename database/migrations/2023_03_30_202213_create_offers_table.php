@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('currency_id')->constrained();
             $table->string('desc_short',100)->nullable();
             $table->string('desc_full')->nullable();
+            $table->boolean('is_offer_desc')->default(false);
             $table->timestamps();
         });
     }

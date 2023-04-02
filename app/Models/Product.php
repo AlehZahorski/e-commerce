@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
@@ -23,11 +22,11 @@ class Product extends Model
 
     public function getProductType(): HasOne
     {
-        return $this->hasOne(ProductType::class,'id','product_type_id');
+        return $this->hasOne(ProductType::class, 'id', 'product_type_id');
     }
 
     public function getOfferCount(int $id): int
     {
-        return Offer::query()->where('product_id','=',$id)->get()->count();
+        return Offer::query()->where('product_id', '=', $id)->get()->count();
     }
 }
