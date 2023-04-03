@@ -17,7 +17,7 @@ class OfferService
     {
         $offerList = Offer::query()->where('product_id', '=', $productId);
 
-        if (empty($offerList->get())) {
+        if ($offerList->get()->isEmpty()) {
             return null;
         }
 

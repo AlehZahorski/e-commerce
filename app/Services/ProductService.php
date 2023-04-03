@@ -18,7 +18,7 @@ class ProductService
     {
         $productList = Product::query();
 
-        if (empty($productList->get())) {
+        if ($productList->get()->isEmpty()) {
             return null;
         }
 
