@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\FilterEnum;
 use App\Enums\SortEnum;
 use App\Models\Offer;
 use App\Models\Product;
@@ -13,7 +14,7 @@ use Illuminate\Http\Request;
 
 class ProductService
 {
-    public function getProductListAction(Request $request): ?ProductCollection
+    public function getProductListAction(Request $request)
     {
         $productList = Product::query();
 
@@ -21,9 +22,11 @@ class ProductService
             return null;
         }
 
-        if (SortEnum::Name->value === $request->get('sort')) {
+        if (SortEnum::Name->value === $request->get(SortEnum::Name->value)) {
             $productList->orderBy('name');
         }
+
+        $this->filterByName($request, $productList);
 
         ProductCollection::withoutWrapping();
 
@@ -98,7 +101,7 @@ class ProductService
             return false;
         }
 
-        $offer = Offer::query()->where('product_id','=',$id)->first();
+        $offer = Offer::query()->where('product_id', '=', $id)->first();
 
         if ($offer) {
             return false;
@@ -107,5 +110,14 @@ class ProductService
         $product->delete();
 
         return true;
+    }
+
+    private function filterByName(Request $request, $productList): void
+    {
+        $filterName = $request->get(FilterEnum::Name->value);
+
+        if ($filterName) {
+            $productList->where('name', 'LIKE', "%{$filterName}%");
+        }
     }
 }

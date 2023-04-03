@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\FilterEnum;
 use App\Enums\SortEnum;
 use App\Models\Offer;
 use App\Requests\Offer\CreateOfferRequest;
@@ -23,6 +24,8 @@ class OfferService
         if (SortEnum::Price->value === $request->get('sort')) {
             $offerList->orderBy('price');
         }
+
+        $this->filterByPrice($request, $offerList);
 
         OfferCollection::withoutWrapping();
 
@@ -93,5 +96,45 @@ class OfferService
         $offer->delete();
 
         return true;
+    }
+
+    private function filterByPrice(Request $request, $offerList): void
+    {
+        if ($this->isMaxPriceLowerThanMinPrice($request)) {
+            return;
+        }
+        $this->filterByMinPrice($request, $offerList);
+        $this->filterByMaxPrice($request, $offerList);
+    }
+
+    private function filterByMinPrice(Request $request, $offerList): void
+    {
+        $filterName = $request->get(FilterEnum::MinPrice->value);
+
+        $minPrice = (int)$filterName;
+
+        if ($minPrice) {
+            $offerList->where('price', '>=', $minPrice);
+        }
+    }
+
+    private function filterByMaxPrice(Request $request, $offerList): void
+    {
+        $filterName = $request->get(FilterEnum::MaxPrice->value);
+
+        $maxPrice = (int)$filterName;
+
+        if ($maxPrice) {
+            $offerList->where('price', '<=', $maxPrice);
+        }
+    }
+
+    private function isMaxPriceLowerThanMinPrice(Request $request): bool
+    {
+        if ($request->get(FilterEnum::MinPrice->value) > $request->get(FilterEnum::MaxPrice->value)) {
+            return true;
+        }
+
+        return false;
     }
 }
