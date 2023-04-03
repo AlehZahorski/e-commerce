@@ -39,8 +39,6 @@ class OfferService
 
     public function createOfferAction(CreateOfferRequest $request): bool
     {
-        // todo auth check but maybe be better check it on controller
-
         $newOffer = Offer::create([
             'product_id' => $request->product_id,
             'price' => $request->price,
@@ -59,8 +57,6 @@ class OfferService
 
     public function updateOfferAction(UpdateOfferRequest $request, int $id): bool
     {
-        // todo auth check but maybe be better check it on controller
-
         $offer = Offer::query()->find($id);
 
         if (!$offer) {
@@ -81,8 +77,6 @@ class OfferService
 
     public function deleteOfferAction(int $id): bool
     {
-        // todo auth check but maybe be better check it on controller
-
         $offer = Offer::query()
             ->where('id', '=', $id)->first();
 

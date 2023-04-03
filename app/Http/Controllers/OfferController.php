@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseTrait;
+use App\Helpers\UserAuthTrait;
 use App\Requests\Offer\CreateOfferRequest;
 use App\Requests\Offer\UpdateOfferRequest;
 use App\Services\OfferService;
@@ -11,6 +12,7 @@ use Illuminate\Http\JsonResponse;
 class OfferController extends Controller
 {
     use ResponseTrait;
+    use UserAuthTrait;
 
     private OfferService $offerService;
 
@@ -38,6 +40,10 @@ class OfferController extends Controller
      */
     public function store(CreateOfferRequest $request): JsonResponse
     {
+        if (!$this->isUserAuth()) {
+            return $this->UNAUTHORIZED('User is not logged in.');
+        }
+
         return $this->offerService->createOfferAction($request)
             ? $this->CREATED()
             : $this->CONFLICT();
@@ -62,6 +68,10 @@ class OfferController extends Controller
      */
     public function update(UpdateOfferRequest $request, int $id): JsonResponse
     {
+        if (!$this->isUserAuth()) {
+            return $this->UNAUTHORIZED('User is not logged in.');
+        }
+
         return $this->offerService->updateOfferAction($request, $id)
             ? $this->OK()
             : $this->CONFLICT();
@@ -72,6 +82,10 @@ class OfferController extends Controller
      */
     public function destroy(int $id): JsonResponse
     {
+        if (!$this->isUserAuth()) {
+            return $this->UNAUTHORIZED('User is not logged in.');
+        }
+
         return $this->offerService->deleteOfferAction($id)
             ? $this->OK()
             : $this->CONFLICT();

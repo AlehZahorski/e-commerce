@@ -40,8 +40,6 @@ class ProductService
 
     public function createProductAction(CreateProductRequest $request): bool
     {
-        // todo auth check but maybe be better check it on controller
-
         $newProduct = Product::create([
             'name' => $request->name,
             'image' => $request->image,
@@ -59,8 +57,6 @@ class ProductService
 
     public function updateProductAction(UpdateProductRequest $request, int $id): bool
     {
-        // todo auth check but maybe be better check it on controller
-
         $product = Product::query()->find($id);
 
         if (
@@ -89,8 +85,6 @@ class ProductService
 
     public function deleteProductAction(int $id): bool
     {
-        // todo auth check but maybe be better check it on controller
-
         $product = Product::query()
             ->where('id', '=', $id)->first();
 

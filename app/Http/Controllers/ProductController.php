@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseTrait;
+use App\Helpers\UserAuthTrait;
 use App\Requests\Product\CreateProductRequest;
 use App\Requests\Product\UpdateProductRequest;
 use App\Services\ProductService;
@@ -11,6 +12,7 @@ use Illuminate\Http\JsonResponse;
 class ProductController extends Controller
 {
     use ResponseTrait;
+    use UserAuthTrait;
 
     private ProductService $productService;
 
@@ -38,6 +40,10 @@ class ProductController extends Controller
      */
     public function store(CreateProductRequest $request): JsonResponse
     {
+        if (!$this->isUserAuth()) {
+            return $this->UNAUTHORIZED('User is not logged in.');
+        }
+
         return $this->productService->createProductAction($request)
             ? $this->CREATED()
             : $this->CONFLICT();
@@ -62,6 +68,10 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, int $id): JsonResponse
     {
+        if (!$this->isUserAuth()) {
+            return $this->UNAUTHORIZED('User is not logged in.');
+        }
+
         return $this->productService->updateProductAction($request, $id)
             ? $this->OK()
             : $this->CONFLICT();
@@ -72,6 +82,10 @@ class ProductController extends Controller
      */
     public function destroy(int $id): JsonResponse
     {
+        if (!$this->isUserAuth()) {
+            return $this->UNAUTHORIZED('User is not logged in.');
+        }
+
         return $this->productService->deleteProductAction($id)
             ? $this->OK()
             : $this->CONFLICT();

@@ -9,7 +9,9 @@ trait UserAuthTrait
 {
     public function isUserAuth(): bool
     {
-        if (!$this->getUser()) {
+        $user = Auth::guard('sanctum')->user();
+
+        if (!$user) {
             return false;
         }
 
