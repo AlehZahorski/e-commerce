@@ -38,7 +38,7 @@ class ProductController extends Controller
      */
     public function store(CreateProductRequest $request): JsonResponse
     {
-        return $this->productService->createProduct($request)
+        return $this->productService->createProductAction($request)
             ? $this->CREATED()
             : $this->CONFLICT();
     }
@@ -48,7 +48,7 @@ class ProductController extends Controller
      */
     public function show(int $productId): JsonResponse
     {
-        $product = $this->productService->getProductById($productId);
+        $product = $this->productService->getProductByIdAction($productId);
 
         if (null === $product) {
             return $this->NOT_FOUND();
@@ -62,7 +62,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, int $id): JsonResponse
     {
-        return $this->productService->updateProduct($request, $id)
+        return $this->productService->updateProductAction($request, $id)
             ? $this->OK()
             : $this->CONFLICT();
     }
@@ -72,7 +72,7 @@ class ProductController extends Controller
      */
     public function destroy(int $id): JsonResponse
     {
-        return $this->productService->deleteProduct($id)
+        return $this->productService->deleteProductAction($id)
             ? $this->OK()
             : $this->CONFLICT();
     }

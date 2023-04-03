@@ -2,8 +2,9 @@
 
 namespace App\Services;
 
-use App\Requests\Product\CreateProductRequest;
+use App\Models\Offer;
 use App\Models\Product;
+use App\Requests\Product\CreateProductRequest;
 use App\Requests\Product\UpdateProductRequest;
 use App\Resources\ProductCollection;
 use App\Resources\ProductResource;
@@ -23,7 +24,7 @@ class ProductService
         return new ProductCollection($productList);
     }
 
-    public function getProductById(int $productId): ?ProductResource
+    public function getProductByIdAction(int $productId): ?ProductResource
     {
         $product = Product::query()
             ->where('id', '=', $productId)->first();
@@ -37,7 +38,7 @@ class ProductService
         return new ProductResource($product);
     }
 
-    public function createProduct(CreateProductRequest $request): bool
+    public function createProductAction(CreateProductRequest $request): bool
     {
         // todo auth check but maybe be better check it on controller
 
@@ -56,7 +57,7 @@ class ProductService
         return true;
     }
 
-    public function updateProduct(UpdateProductRequest $request, int $id): bool
+    public function updateProductAction(UpdateProductRequest $request, int $id): bool
     {
         // todo auth check but maybe be better check it on controller
 
@@ -86,7 +87,7 @@ class ProductService
         return true;
     }
 
-    public function deleteProduct(int $id): bool
+    public function deleteProductAction(int $id): bool
     {
         // todo auth check but maybe be better check it on controller
 
@@ -94,6 +95,12 @@ class ProductService
             ->where('id', '=', $id)->first();
 
         if (!$product) {
+            return false;
+        }
+
+        $offer = Offer::query()->where('product_id','=',$id)->first();
+
+        if ($offer) {
             return false;
         }
 

@@ -25,10 +25,13 @@ Route::prefix('product')->group(function () {
     Route::get('/{id}', [ProductController::class, 'show']);
     Route::post('/create', [ProductController::class, 'store']);
     Route::put('/update/{id}', [ProductController::class, 'update']);
-    Route::put('/delete/{id}', [ProductController::class, 'destroy']);
+    Route::delete('/delete/{id}', [ProductController::class, 'destroy']);
 });
 
 Route::prefix('offer')->group(function () {
     Route::get('/list/{productId}', [OfferController::class, 'index']);
     Route::get('/{id}', [OfferController::class, 'show']);
+    Route::post('/create', [ProductController::class, 'store']);
+    Route::put('/update/{id}', [ProductController::class, 'update']);
+    Route::delete('/delete/{id}', [ProductController::class, 'destroy']);
 });

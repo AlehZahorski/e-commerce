@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseTrait;
+use App\Requests\Offer\CreateOfferRequest;
+use App\Requests\Offer\UpdateOfferRequest;
 use App\Services\OfferService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class OfferController extends Controller
 {
@@ -35,9 +36,11 @@ class OfferController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateOfferRequest $request): JsonResponse
     {
-        //
+        return $this->offerService->createOfferAction($request)
+            ? $this->CREATED()
+            : $this->CONFLICT();
     }
 
     /**
@@ -57,16 +60,20 @@ class OfferController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateOfferRequest $request, int $id): JsonResponse
     {
-        //
+        return $this->offerService->updateOfferAction($request, $id)
+            ? $this->OK()
+            : $this->CONFLICT();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id): JsonResponse
     {
-        //
+        return $this->offerService->deleteOfferAction($id)
+            ? $this->OK()
+            : $this->CONFLICT();
     }
 }
