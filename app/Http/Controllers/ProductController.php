@@ -8,6 +8,7 @@ use App\Requests\Product\CreateProductRequest;
 use App\Requests\Product\UpdateProductRequest;
 use App\Services\ProductService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -24,9 +25,9 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $productList = $this->productService->getProductListAction();
+        $productList = $this->productService->getProductListAction($request);
 
         if (null === $productList) {
             return $this->NOT_FOUND();

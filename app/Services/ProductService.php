@@ -2,26 +2,32 @@
 
 namespace App\Services;
 
+use App\Enums\SortEnum;
 use App\Models\Offer;
 use App\Models\Product;
 use App\Requests\Product\CreateProductRequest;
 use App\Requests\Product\UpdateProductRequest;
 use App\Resources\ProductCollection;
 use App\Resources\ProductResource;
+use Illuminate\Http\Request;
 
 class ProductService
 {
-    public function getProductListAction(): ?ProductCollection
+    public function getProductListAction(Request $request): ?ProductCollection
     {
-        $productList = Product::all();
+        $productList = Product::query();
 
-        if (empty($productList)) {
+        if (empty($productList->get())) {
             return null;
+        }
+
+        if (SortEnum::Name->value === $request->get('sort')) {
+            $productList->orderBy('name');
         }
 
         ProductCollection::withoutWrapping();
 
-        return new ProductCollection($productList);
+        return new ProductCollection($productList->get());
     }
 
     public function getProductByIdAction(int $productId): ?ProductResource

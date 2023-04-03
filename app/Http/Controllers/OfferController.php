@@ -7,6 +7,7 @@ use App\Helpers\UserAuthTrait;
 use App\Requests\Offer\CreateOfferRequest;
 use App\Requests\Offer\UpdateOfferRequest;
 use App\Services\OfferService;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class OfferController extends Controller
@@ -24,9 +25,9 @@ class OfferController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(int $productId): JsonResponse
+    public function index(Request $request, int $productId): JsonResponse
     {
-        $offerList = $this->offerService->getOfferListByProductIdAction($productId);
+        $offerList = $this->offerService->getOfferListByProductIdAction($request, $productId);
 
         if (null === $offerList) {
             return $this->NOT_FOUND();

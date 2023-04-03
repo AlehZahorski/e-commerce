@@ -2,25 +2,31 @@
 
 namespace App\Services;
 
+use App\Enums\SortEnum;
 use App\Models\Offer;
 use App\Requests\Offer\CreateOfferRequest;
 use App\Requests\Offer\UpdateOfferRequest;
 use App\Resources\OfferCollection;
 use App\Resources\OfferResource;
+use Illuminate\Http\Request;
 
 class OfferService
 {
-    public function getOfferListByProductIdAction(int $productId): ?OfferCollection
+    public function getOfferListByProductIdAction(Request $request, int $productId): ?OfferCollection
     {
-        $offerList = Offer::query()->where('product_id', '=', $productId)->get();
+        $offerList = Offer::query()->where('product_id', '=', $productId);
 
-        if (empty($offerList)) {
+        if (empty($offerList->get())) {
             return null;
+        }
+
+        if (SortEnum::Price->value === $request->get('sort')) {
+            $offerList->orderBy('price');
         }
 
         OfferCollection::withoutWrapping();
 
-        return new OfferCollection($offerList);
+        return new OfferCollection($offerList->get());
     }
 
     public function getOfferByIdAction(int $offerId): ?OfferResource

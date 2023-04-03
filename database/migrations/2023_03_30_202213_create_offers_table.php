@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained();
-            $table->decimal('price',18,9,true);
+            $table->decimal('price',18,2,true);
             $table->foreignId('currency_id')->constrained();
             $table->string('desc_short',100)->nullable();
             $table->string('desc_full')->nullable();

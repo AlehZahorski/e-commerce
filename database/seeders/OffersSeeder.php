@@ -20,15 +20,15 @@ class OffersSeeder extends Seeder
             ],
             [
                 'product_id' => 1,
-                'price' => 130.00,
-                'currency_id' => 2,
+                'price' => 799.00,
+                'currency_id' => 1,
                 'desc_short' => null,
                 'desc_full' => null
             ],
             [
                 'product_id' => 1,
-                'price' => 125.00,
-                'currency_id' => 3,
+                'price' => 741.00,
+                'currency_id' => 1,
                 'desc_short' => null,
                 'desc_full' => null
             ],
@@ -41,15 +41,15 @@ class OffersSeeder extends Seeder
             ],
             [
                 'product_id' => 2,
-                'price' => 1300.00,
-                'currency_id' => 2,
+                'price' => 4999.99,
+                'currency_id' => 1,
                 'desc_short' => null,
                 'desc_full' => 'test test test test'
             ],
             [
                 'product_id' => 2,
-                'price' => 1250.00,
-                'currency_id' => 3,
+                'price' => 4321.00,
+                'currency_id' => 1,
                 'desc_short' => null,
                 'desc_full' => null
             ],
@@ -62,15 +62,15 @@ class OffersSeeder extends Seeder
             ],
             [
                 'product_id' => 3,
-                'price' => 2000.00,
-                'currency_id' => 2,
+                'price' => 7999.99,
+                'currency_id' => 1,
                 'desc_short' => null,
                 'desc_full' => 'null test'
             ],
             [
                 'product_id' => 3,
-                'price' => 1950.00,
-                'currency_id' => 3,
+                'price' => 6574.99,
+                'currency_id' => 1,
                 'desc_short' => null,
                 'desc_full' => null
             ]

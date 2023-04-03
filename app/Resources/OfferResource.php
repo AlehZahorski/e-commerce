@@ -13,6 +13,7 @@ class OfferResource extends JsonResource
             'id' => $this->id,
             'name' => $this->getProduct->name,
             'image' => $this->getProduct->image,
+            'price' => $this->price,
             'productType' => $this->getProductType($this->getProduct->product_type_id),
             'isOfferDesc' => (bool)$this->is_offer_desc,
             'descShort' => $this->isOfferDesc($this->id)
