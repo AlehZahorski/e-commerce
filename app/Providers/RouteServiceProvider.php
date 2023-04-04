@@ -26,6 +26,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
+        $this->adjustingTypeOfParamsInApiRoutes();
+
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')
@@ -44,5 +46,12 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
+    }
+
+    private function adjustingTypeOfParamsInApiRoutes()
+    {
+        Route::pattern('id', '[0-9]+');
+        Route::pattern('productId', '[0-9]+');
+        Route::pattern('offerId', '[0-9]+');
     }
 }
