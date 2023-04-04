@@ -15,7 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/product/list?sort=name",
+							"raw": "http://127.0.0.1:8000/api/product/list?sort=name&filter_name=",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -33,6 +33,10 @@
 								{
 									"key": "sort",
 									"value": "name"
+								},
+								{
+									"key": "filter_name",
+									"value": ""
 								}
 							]
 						}
@@ -166,7 +170,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/offer/list/2?sort=price",
+							"raw": "http://127.0.0.1:8000/api/offer/list/2",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -184,7 +188,18 @@
 							"query": [
 								{
 									"key": "sort",
-									"value": "price"
+									"value": "price",
+									"disabled": true
+								},
+								{
+									"key": "filter_min_price",
+									"value": "4200",
+									"disabled": true
+								},
+								{
+									"key": "filter_max_price",
+									"value": "123",
+									"disabled": true
 								}
 							]
 						}
@@ -288,7 +303,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/offer/delete/4",
+							"raw": "http://127.0.0.1:8000/api/offer/delete/3",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -301,7 +316,7 @@
 								"api",
 								"offer",
 								"delete",
-								"4"
+								"3"
 							]
 						}
 					},
@@ -433,7 +448,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "2|QoFEGVz4FVADMF3xUpt3v9xmGfRgZG1qxyrrsdYY",
+				"value": "2|BkKCdPDgKku1mPCYtFn4CtkizI32KTBLMKuKng0q",
 				"type": "string"
 			}
 		]
