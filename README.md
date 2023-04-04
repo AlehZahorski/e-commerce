@@ -1,9 +1,11 @@
 1. composer install
-2. php artisan generate:key
+(create env from env examlple)
+2. php artisan key:generate
 3. php artisan migrate:fresh --seed
 4. php artisan serve
 (remember about import postman collection)
 
+![image](https://user-images.githubusercontent.com/48770625/229848200-136eb65b-ce99-483f-b147-f951aad832c8.png)
 
 
 
