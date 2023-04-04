@@ -7,6 +7,9 @@
 
 ![image](https://user-images.githubusercontent.com/48770625/229848200-136eb65b-ce99-483f-b147-f951aad832c8.png)
 
+structure of DB
+![image](https://user-images.githubusercontent.com/48770625/229856470-88b4d097-a228-4645-9f35-4eda4985c863.png)
+
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
